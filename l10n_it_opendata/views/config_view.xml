@@ -12,7 +12,6 @@
                         or
                         <button string="Cancel" type="object" name="cancel" class="oe_link"/>
                     </header>
-                    <separator string="OpenData Settings"/>
                 </form>
             </field>
         </record>
