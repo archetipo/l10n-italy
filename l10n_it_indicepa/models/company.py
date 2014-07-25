@@ -41,8 +41,8 @@ opendata-read-service.php?dstype=FS&filename=serv_fatt.txt",
     }
 
 
-class account_config_settings(orm.TransientModel):
-    _inherit = 'account.config.settings'
+class opendata_config_settings(orm.TransientModel):
+    _inherit = 'opendata.config.settings'
     _columns = {
         'indicepa_open_data_url': fields.related(
             'company_id', 'indicepa_open_data_url',

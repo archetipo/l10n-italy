@@ -21,17 +21,18 @@
     'name': 'Italian Localization - IndicePA',
     'version': '0.1',
     'category': 'Localization/Italy',
-    'summary': 'Indice della Pubblica Amministrazione',
+    'summary': 'Indice delle Pubbliche Amministrazioni',
     'description': """
-Indice della Pubblica Amministrazione (http://www.indicepa.gov.it)
+Indice delle Pubbliche Amministrazioni (http://www.indicepa.gov.it)
     """,
     'author': 'OpenERP Italian Community',
     'website': 'http://www.openerp-italia.org',
     'license': 'AGPL-3',
     "depends": [
-        'base', 'base_vat', 'account', 'l10n_it_base', 'l10n_it_fiscalcode'],
+        'base', 'base_vat', 'account', 'l10n_it_base', 'l10n_it_fiscalcode',
+        'l10n_it_opendata'],
     "data": [
-        'views/company_view.xml',
+        'views/config_view.xml',
         'views/partner_view.xml',
     ],
     "test": [],

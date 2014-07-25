@@ -2,13 +2,13 @@
 <openerp>
     <data>
 
-        <record id="view_account_config_settings" model="ir.ui.view">
-            <field name="name">view_account_config_settings</field>
-            <field name="model">account.config.settings</field>
-            <field name="inherit_id" ref="account.view_account_config_settings"/>
+        <record id="view_indicepa_configuration" model="ir.ui.view">
+            <field name="name">view_indicepa_configuration</field>
+            <field name="model">opendata.config.settings</field>
+            <field name="inherit_id" ref="l10n_it_opendata.view_opendata_configuration"/>
             <field name="arch" type="xml">
-                <xpath expr="/form/group[6]" position="after">
-                    <separator string="IndicePA"/>
+                <xpath expr="/form" position="inside">
+                    <separator string="IndicePA Settings"/>
                     <group name="indicepa_settings">
                         <label for="id" string="Configuration"/>
                         <div>
