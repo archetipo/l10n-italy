@@ -1,0 +1,52 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* l10n_it_opendata
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-25 18:50+0000\n"
+"PO-Revision-Date: 2014-07-25 20:50+0100\n"
+"Last-Translator: Davide Corio <davide.corio@lsweb.it>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: it\n"
+"X-Generator: Poedit 1.6.4\n"
+
+#. module: l10n_it_opendata
+#: view:opendata.config.settings:0
+msgid "Apply"
+msgstr "Applica"
+
+#. module: l10n_it_opendata
+#: view:opendata.config.settings:0
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: l10n_it_opendata
+#: model:ir.actions.act_window,name:l10n_it_opendata.action_opendata_configuration
+#: model:ir.ui.menu,name:l10n_it_opendata.menu_opendata_configuration
+#: view:opendata.config.settings:0
+msgid "OpenData"
+msgstr "OpenData"
+
+#. module: l10n_it_opendata
+#: view:opendata.config.settings:0
+msgid "OpenData Settings"
+msgstr "Configurazioni OpenData"
+
+#. module: l10n_it_opendata
+#: code:_description:0
+#: model:ir.model,name:l10n_it_opendata.model_opendata_config_settings
+#, python-format
+msgid "opendata.config.settings"
+msgstr "opendata.config.settings"
+
+#. module: l10n_it_opendata
+#: view:opendata.config.settings:0
+msgid "or"
+msgstr "o"
