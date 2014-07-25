@@ -2,5 +2,46 @@
 <openerp>
     <data>
 
+        <record id="view_account_config_settings" model="ir.ui.view">
+            <field name="name">view_account_config_settings</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/group[6]" position="after">
+                    <separator string="IndicePA"/>
+                    <group name="indicepa_settings">
+                        <label for="id" string="Configuration"/>
+                        <div>
+                            <div>
+                                <label for="indicepa_open_data_url"/>
+                                <field name="indicepa_open_data_url" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="indicepa_ldap_server"/>
+                                <field name="indicepa_ldap_server" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="indicepa_ldap_port"/>
+                                <field name="indicepa_ldap_port" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="indicepa_ldap_base_dn"/>
+                                <field name="indicepa_ldap_base_dn" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="indicepa_ldap_username"/>
+                                <field name="indicepa_ldap_username" class="oe_inline"/>
+                            </div>
+                            <div>
+                                <label for="indicepa_ldap_password"/>
+                                <field name="indicepa_ldap_password" class="oe_inline"
+                                    password="True"/>
+                            </div>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
 	</data>
 </openerp>
