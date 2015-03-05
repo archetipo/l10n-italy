@@ -10,6 +10,7 @@
             <field name="sequence" position="after" >
                 <field name="pec" />
                 <field name="in_server_id" attrs="{'required':[('pec', '=', True)]}" />
+                <field name="pec_email" attrs="{'invisible':[('pec', '=', False)]}"/>
             </field>
         </field>
     </record>

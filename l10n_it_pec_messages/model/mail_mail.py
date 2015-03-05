@@ -57,8 +57,11 @@ class MailMail(orm.Model):
             if server_ids:
                 server = server_pool.browse(
                     cr, uid, server_ids[0], context=context)
+                pec_addrr= server.smtp_user
+                if server.pec_email:
+                    pec_addrr= server.pec_email
                 mail.write({
-                    'email_from': server.smtp_user,
+                    'email_from': pec_addrr,
                     'mail_server_id': server.id,
                     'server_id': in_server_id,
                     'out_server_id': server.id,
@@ -67,7 +70,7 @@ class MailMail(orm.Model):
                     }, context=context)
                 mail_msg_pool.write(
                     cr, uid, mail.mail_message_id.id,
-                    {'email_from': server.smtp_user})
+                    {'email_from': pec_addrr})
         return res
 
     def send_get_email_dict(self, cr, uid, mail, partner=None, context=None):

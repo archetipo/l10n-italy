@@ -35,6 +35,8 @@ class ir_mail_server(orm.Model):
         'pec': fields.boolean(
             "Pec Server",
             help="Check if this server is PEC"),
+        'pec_email': fields.char('Pec Email', help="The mail address used \
+                    to send pec mails"),
     }
     _sql_constraints = [
         ('incomingserver_name_unique', 'unique(in_server_id)',
