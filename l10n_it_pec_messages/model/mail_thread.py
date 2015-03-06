@@ -162,9 +162,19 @@ class MailThread(orm.Model):
                 # I'm going to set this message as notification of the original
                 # message and remove the message_id of this message
                 # (it would be duplicated)
-                context['main_message_id'] = msg_ids[0]
-                context['pec_type'] = daticert_dict.get('pec_type')
-            #~ del msg_dict['message_id']
+                # before deletion check if this message is prensent and linked with
+                # main massage id, if false remove message_id else no
+                chk_msgids = message_pool.search(
+                    cr, uid,
+                    [
+                        ('pec_msg_id', '=', daticert_dict['pec_msg_id']),
+                        ('pec_type', '=',  daticert_dict.get('pec_type'))
+                    ],
+                    context=context)
+                if not chk_msgids:
+                    context['main_message_id'] = msg_ids[0]
+                    context['pec_type'] = daticert_dict.get('pec_type')
+                    del msg_dict['message_id']
         #if message transport resend original mail with
         #transport error , marks in original message with
         #error, and after the server not save the original message
