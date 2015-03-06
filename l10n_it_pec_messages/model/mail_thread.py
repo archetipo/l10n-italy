@@ -164,7 +164,7 @@ class MailThread(orm.Model):
                 # (it would be duplicated)
                 context['main_message_id'] = msg_ids[0]
                 context['pec_type'] = daticert_dict.get('pec_type')
-            del msg_dict['message_id']
+            #~ del msg_dict['message_id']
         #if message transport resend original mail with
         #transport error , marks in original message with
         #error, and after the server not save the original message
