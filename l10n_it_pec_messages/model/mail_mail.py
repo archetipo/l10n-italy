@@ -98,8 +98,10 @@ class MailMail(orm.Model):
                         cr, SUPERUSER_ID, existing_recipient_ids,
                         context=context
                     ):
+                        if address_lst:
+                            address_lst += ', '
                         address_lst += formataddr(
-                            (partner.name, partner.pec_mail)) + ' '
+                            (partner.name, partner.pec_mail))
                     self.write(
                         cr, uid, mail.id,
                         {'email_to': address_lst}, context=context
