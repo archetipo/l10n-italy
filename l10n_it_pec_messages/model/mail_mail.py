@@ -26,6 +26,7 @@
 from openerp.osv import orm
 from email.utils import formataddr
 from openerp import SUPERUSER_ID
+from email.utils import COMMASPACE
 
 
 class MailMail(orm.Model):
@@ -99,7 +100,7 @@ class MailMail(orm.Model):
                         context=context
                     ):
                         if address_lst:
-                            address_lst += ', '
+                            address_lst += COMMASPACE
                         address_lst += formataddr(
                             (partner.name, partner.pec_mail))
                     self.write(
