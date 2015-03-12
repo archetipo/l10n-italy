@@ -47,8 +47,11 @@ class MailThread(orm.Model):
     def parse_daticert(self, cr, uid, daticert, context=None):
         msg_dict = {}
         root = ET.fromstring(daticert)
+        message = None
         if 'tipo' in root.attrib:
             msg_dict['pec_type'] = root.attrib['tipo']
+        if 'errore' in root.attrib:
+            msg_dict['err_type'] = root.attrib['errore']
         for child in root:
             if child.tag == 'intestazione':
                 for child2 in child:
@@ -60,6 +63,10 @@ class MailThread(orm.Model):
                         msg_dict['message_id'] = child2.text
                     if child2.tag == 'identificativo':
                         msg_dict['pec_msg_id'] = child2.text
+                    if child2.tag == 'consegna':
+                        recipient_id = self._FindOrCreatePartnersPec(
+                            cr, uid, message, child2.text, context=context)
+                        msg_dict['recipient_id'] = recipient_id
         return msg_dict
 
     def get_pec_attachments(self, cr, uid, message, context=None):
@@ -107,6 +114,7 @@ class MailThread(orm.Model):
     ):
         if context is None:
             context = {}
+
         context['main_message_id'] = False
         context['pec_type'] = False
         if not self.is_server_pec(cr, uid, context=context):
@@ -154,9 +162,20 @@ class MailThread(orm.Model):
                 # I'm going to set this message as notification of the original
                 # message and remove the message_id of this message
                 # (it would be duplicated)
-                context['main_message_id'] = msg_ids[0]
-                context['pec_type'] = daticert_dict.get('pec_type')
-            del msg_dict['message_id']
+                # before deletion check if this message is prensent and linked with
+                # main massage id, if false remove message_id else no
+                chk_msgids = message_pool.search(
+                    cr, uid,
+                    [
+                        ('pec_msg_id', '=', daticert_dict['pec_msg_id']),
+                        ('pec_type', '=',  daticert_dict.get('pec_type')),
+                        ('recipient_id', '=',  daticert_dict.get('recipient_id'))
+                    ],
+                    context=context)
+                if not chk_msgids:
+                    context['main_message_id'] = msg_ids[0]
+                    context['pec_type'] = daticert_dict.get('pec_type')
+                    del msg_dict['message_id']
         #if message transport resend original mail with
         #transport error , marks in original message with
         #error, and after the server not save the original message
@@ -180,23 +199,15 @@ class MailThread(orm.Model):
                         'error': True,
                     }, context=context)
 
-        author_id = self._message_find_partners_pec(
+        author_id = self._FindOrCreatePartnersPec(
             cr, uid, message, daticert_dict.get('email_from'), context=context)
-        if author_id:
-            msg_dict['author_id'] = author_id
-        else:
-            msg_dict['author_id'] = self.pool.get('res.partner').create(
-                cr, SUPERUSER_ID,
-                {
-                    'name': daticert_dict.get('email_from'),
-                    'pec_mail': daticert_dict.get('email_from')
-                },context = context)
+        msg_dict['author_id'] = author_id
         msg_dict['server_id'] = context.get('fetchmail_server_id')
 
         return msg_dict
 
-    def _message_find_partners_pec(
-        self, cr, uid, message, email_from=False, context=None
+    def _FindPartnersPec(
+        self, cr, uid, message=None, email_from=False, context=None
     ):
         """
         create new method to search partner because
@@ -211,4 +222,21 @@ class MailThread(orm.Model):
                 context=context)
             if partner_ids:
                 res = partner_ids[0]
+        return res
+
+    def _FindOrCreatePartnersPec(
+        self, cr, uid, message=None, pec_address=False, context=None
+    ):
+        """
+        search partner if not exit create it
+        """
+        res = self._FindPartnersPec(
+            cr, uid, message, pec_address, context=context)
+        if not res:
+            res = self.pool['res.partner'].create(
+                cr, SUPERUSER_ID,
+                {
+                    'name': pec_address,
+                    'pec_mail': pec_address
+                }, context=context)
         return res
