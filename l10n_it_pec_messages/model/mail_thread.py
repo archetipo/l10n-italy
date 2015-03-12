@@ -168,7 +168,8 @@ class MailThread(orm.Model):
                     cr, uid,
                     [
                         ('pec_msg_id', '=', daticert_dict['pec_msg_id']),
-                        ('pec_type', '=',  daticert_dict.get('pec_type'))
+                        ('pec_type', '=',  daticert_dict.get('pec_type')),
+                        ('recipient_id', '=',  daticert_dict.get('recipient_id'))
                     ],
                     context=context)
                 if not chk_msgids:
