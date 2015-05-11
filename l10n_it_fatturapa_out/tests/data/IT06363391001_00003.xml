@@ -6,7 +6,7 @@
                 <IdPaese>IT</IdPaese>
                 <IdCodice>06363391001</IdCodice>
             </IdTrasmittente>
-            <ProgressivoInvio>00002</ProgressivoInvio>
+            <ProgressivoInvio>00003</ProgressivoInvio>
             <FormatoTrasmissione>SDI11</FormatoTrasmissione>
             <CodiceDestinatario>79SRAK</CodiceDestinatario>
             <ContattiTrasmittente>
@@ -63,7 +63,7 @@
                 <TipoDocumento>TD01</TipoDocumento>
                 <Divisa>EUR</Divisa>
                 <Data>2015-02-15</Data>
-                <Numero>SAJ/2015/014</Numero>
+                <Numero>SAJ/2015/015</Numero>
                 <Causale>prima riga</Causale>
                 <Causale>seconda riga</Causale>
                 <Art73>SI</Art73>
@@ -107,5 +107,13 @@
                 <ImportoPagamento>17.08</ImportoPagamento>
             </DettaglioPagamento>
         </DatiPagamento>
+        <Allegati>
+            <NomeAttachment>test1.pdf</NomeAttachment>
+            <Attachment>YldsbmNtRjBhVzl1SUhSbGMzUT0K</Attachment>
+        </Allegati>
+        <Allegati>
+            <NomeAttachment>test2.pdf</NomeAttachment>
+            <Attachment>YldsbmNtRjBhVzl1SUhSbGMzTT0K</Attachment>
+        </Allegati>
     </FatturaElettronicaBody>
 </ns1:FatturaElettronica>
