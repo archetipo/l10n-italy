@@ -21,10 +21,7 @@
 
 import base64
 import tempfile
-
-from openerp import workflow
-from openerp import addons
-
+import netsvc
 import openerp.tests.common as test_common
 from openerp import addons
 from datetime import datetime
@@ -35,7 +32,6 @@ import os
 
 class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
 
-
     def getFilePath(self, filepath):
         with open(filepath) as test_data:
             with tempfile.TemporaryFile() as out:
@@ -44,16 +40,18 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
                 return filepath, out.read()
 
     def getAttacment(self, name):
-        path = get_module_resource('l10n_it_fatturapa_out',
-                                          'tests', 'data', 'attah_base.pdf')
+        path = addons.get_module_resource(
+            'l10n_it_fatturapa_out',
+            'tests', 'data', 'attah_base.pdf'
+        )
         currDir = os.path.dirname(path)
         new_file = '%s/%s' % (currDir, name)
         shutil.copyfile(path, new_file)
         return self.getFilePath(new_file)
 
     def getFile(self, filename):
-        path = get_module_resource('l10n_it_fatturapa_out',
-                                   'tests', 'data', filename)
+        path = addons.get_module_resource(
+            'l10n_it_fatturapa_out', 'tests', 'data', filename)
         return self.getFilePath(path)
 
     def setUp(self):
@@ -65,7 +63,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         self.fatturapa_attach = self.registry('fatturapa.attachments')
         self.context = {}
 
-    def AttachFileAtInvoice(self, InvoiceId, filename):
+    def attachFileToInvoice(self, InvoiceId, filename):
         self.fatturapa_attach.create(
             self.cr, self.uid,
             {
@@ -165,8 +163,8 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         # this  write updates context with
         # fiscalyear_id
         if attach:
-            self.AttachFileAtInvoice(invoice_id, 'test1.pdf')
-            self.AttachFileAtInvoice(invoice_id, 'test2.pdf')
+            self.attachFileToInvoice(invoice_id, 'test1.pdf')
+            self.attachFileToInvoice(invoice_id, 'test2.pdf')
         self.invoice_model.write(
             cr, uid, invoice_id, {}, context=self.context)
         wf_service = netsvc.LocalService("workflow")
@@ -220,7 +218,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         cr, uid = self.cr, self.uid
         self.checkCreateFiscalYear('2015-06-15')
         self.set_sequences(3, 15)
-        invoice_id = self.confirm_invoice('fatturapa_invoice_2',attach=True)
+        invoice_id = self.confirm_invoice('fatturapa_invoice_2', attach=True)
         res = self.run_wizard(invoice_id)
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
         xml_content = attachment.datas.decode('base64')
