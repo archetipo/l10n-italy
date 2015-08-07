@@ -22,22 +22,36 @@
 import base64
 import tempfile
 from openerp import workflow
+from openerp import addons
 import openerp.tests.common as test_common
 from openerp.modules.module import get_module_resource
 from datetime import datetime
 from lxml import etree
+import shutil
+import os
 
 
 class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
 
-    def getFile(self, filename):
-        path = get_module_resource('l10n_it_fatturapa_out',
-                                   'tests', 'data', filename)
-        with open(path) as test_data:
+    def getFilePath(self, filepath):
+        with open(filepath) as test_data:
             with tempfile.TemporaryFile() as out:
                 base64.encode(test_data, out)
                 out.seek(0)
-                return path, out.read()
+                return filepath, out.read()
+
+    def getAttacment(self, name):
+        path = addons.get_module_resource('protocollo',
+                                          'tests', 'data', 'attah_base.pdf')
+        currDir = os.path.dirname(path)
+        new_file = '%s/%s.pdf' % (currDir, name)
+        shutil.copyfile(path, new_file)
+        return self.getFilePath(new_file)
+
+    def getFile(self, filename):
+        path = get_module_resource('l10n_it_fatturapa_out',
+                                   'tests', 'data', filename)
+        return self.getFilePath(path)
 
     def setUp(self):
         super(TestFatturaPAXMLValidation, self).setUp()
@@ -45,8 +59,20 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         self.data_model = self.registry('ir.model.data')
         self.attach_model = self.registry('fatturapa.attachment.out')
         self.invoice_model = self.registry('account.invoice')
+        self.fatturapa_attach = self.registry('fatturapa.attachments')
         self.context = {}
         self.maxDiff = None
+
+    def AttachFileAtInvoice(self, InvoiceId, filename):
+        self.fatturapa_attach.create(
+            self.cr, self.uid,
+            {
+                'name': filename,
+                'invoice_id': InvoiceId,
+                'datas': self.getAttacment(filename)[0],
+                'datas_fname': filename
+            }
+        )
 
     def checkCreateFiscalYear(self, date_to_check):
         '''
@@ -189,6 +215,8 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         self.checkCreateFiscalYear('2015-06-15')
         self.set_sequences(3, 15)
         invoice_id = self.confirm_invoice('fatturapa_invoice_2')
+        self.AttachFileAtInvoice(invoice_id, 'test1.pdf')
+        self.AttachFileAtInvoice(invoice_id, 'test2.pdf')
         res = self.run_wizard(invoice_id)
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
         xml_content = attachment.datas.decode('base64')
