@@ -41,11 +41,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
                 return filepath, out.read()
 
     def getAttacment(self, name):
-<<<<<<< HEAD
-        path = addons.get_module_resource('l10n_it_fatturapa_out',
-=======
         path = get_module_resource('l10n_it_fatturapa_out',
->>>>>>> [FIX] my mistake
                                           'tests', 'data', 'attah_base.pdf')
         currDir = os.path.dirname(path)
         new_file = '%s/%s' % (currDir, name)
