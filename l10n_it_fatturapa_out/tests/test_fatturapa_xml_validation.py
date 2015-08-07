@@ -41,10 +41,14 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
                 return filepath, out.read()
 
     def getAttacment(self, name):
+<<<<<<< HEAD
         path = addons.get_module_resource('l10n_it_fatturapa_out',
+=======
+        path = get_module_resource('l10n_it_fatturapa_out',
+>>>>>>> [FIX] my mistake
                                           'tests', 'data', 'attah_base.pdf')
         currDir = os.path.dirname(path)
-        new_file = '%s/%s.pdf' % (currDir, name)
+        new_file = '%s/%s' % (currDir, name)
         shutil.copyfile(path, new_file)
         return self.getFilePath(new_file)
 
@@ -69,7 +73,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
             {
                 'name': filename,
                 'invoice_id': InvoiceId,
-                'datas': self.getAttacment(filename)[0],
+                'datas': self.getAttacment(filename)[1],
                 'datas_fname': filename
             }
         )
@@ -153,7 +157,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
             context=self.context
         )
 
-    def confirm_invoice(self, invoice_xml_id):
+    def confirm_invoice(self, invoice_xml_id, attach=False):
         cr, uid = self.cr, self.uid
 
         invoice_id = self.data_model.get_object_reference(
@@ -162,6 +166,9 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
             invoice_id = invoice_id and invoice_id[1] or False
         # this  write updates context with
         # fiscalyear_id
+        if attach:
+            self.AttachFileAtInvoice(invoice_id, 'test1.pdf')
+            self.AttachFileAtInvoice(invoice_id, 'test2.pdf')
         self.invoice_model.write(
             cr, uid, invoice_id, {}, context=self.context)
         workflow.trg_validate(
@@ -214,9 +221,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         cr, uid = self.cr, self.uid
         self.checkCreateFiscalYear('2015-06-15')
         self.set_sequences(3, 15)
-        invoice_id = self.confirm_invoice('fatturapa_invoice_2')
-        self.AttachFileAtInvoice(invoice_id, 'test1.pdf')
-        self.AttachFileAtInvoice(invoice_id, 'test2.pdf')
+        invoice_id = self.confirm_invoice('fatturapa_invoice_2',attach=True)
         res = self.run_wizard(invoice_id)
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
         xml_content = attachment.datas.decode('base64')
