@@ -41,7 +41,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
                 return filepath, out.read()
 
     def getAttacment(self, name):
-        path = addons.get_module_resource('protocollo',
+        path = addons.get_module_resource('l10n_it_fatturapa_out',
                                           'tests', 'data', 'attah_base.pdf')
         currDir = os.path.dirname(path)
         new_file = '%s/%s.pdf' % (currDir, name)
