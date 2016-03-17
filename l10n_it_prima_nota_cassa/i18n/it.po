@@ -1,19 +1,21 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* l10n_it_prima_nota_cassa
-#
+# * l10n_it_prima_nota_cassa
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 7.0\n"
+"Project-Id-Version: l10n-italy (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-12 09:09+0000\n"
-"PO-Revision-Date: 2013-02-12 10:16+0100\n"
-"Last-Translator: Davide Corio <davide.corio@agilebg.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-11-25 16:46+0000\n"
+"PO-Revision-Date: 2015-11-18 17:08+0000\n"
+"Last-Translator: Maxime Chambreuil <maxime.chambreuil@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-italy-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_it_prima_nota_cassa
 #: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:8
@@ -27,30 +29,26 @@ msgstr "Nessun Filtro"
 
 #. module: l10n_it_prima_nota_cassa
 #: view:account.report.prima_nota_cassa:0
-msgid "This report prints a summary of all cash and bank moves in a given date or period range. It is possible to restrict analysis to single cash or bank accounts on the second tab."
+msgid ""
+"This report prints a summary of all cash and bank moves in a given date or "
+"period range. It is possible to restrict analysis to single cash or bank "
+"accounts on the second tab."
 msgstr "Questo report stampa un sommario di tutti i movimenti di cassa e banca in un dato periodo o data. E' possibile restringere l'analisi ad un singolo conto bancario o cassa usando il secondo tab."
 
 #. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:43
-#: code:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.py:38
-#, python-format
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:40
 msgid "Debit"
 msgstr "Debito"
 
 #. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:16
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:15
 msgid "Filter By"
 msgstr "Filtra Per"
 
 #. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:42
-msgid "Entry"
-msgstr "Registrazione"
-
-#. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:40
-msgid "Ref"
-msgstr "Rif"
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:39
+msgid "Description"
+msgstr "Descrizione"
 
 #. module: l10n_it_prima_nota_cassa
 #: field:account.report.prima_nota_cassa,company_id:0
@@ -73,19 +71,19 @@ msgid "With balance is not equal to 0"
 msgstr "Con saldo diverso da 0"
 
 #. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:15
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:14
 msgid "Jounal"
 msgstr "Sezionale"
 
 #. module: l10n_it_prima_nota_cassa
 #: selection:account.report.prima_nota_cassa,filter:0
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:37
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:35
 msgid "Date"
 msgstr "Data"
 
 #. module: l10n_it_prima_nota_cassa
 #: field:account.report.prima_nota_cassa,chart_account_id:0
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:13
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:12
 msgid "Chart of Account"
 msgstr "Piano dei Conti"
 
@@ -96,7 +94,7 @@ msgstr "Sezionali"
 
 #. module: l10n_it_prima_nota_cassa
 #: field:account.report.prima_nota_cassa,target_move:0
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:17
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:16
 msgid "Target Moves"
 msgstr "Movimenti"
 
@@ -131,13 +129,13 @@ msgid "End Period"
 msgstr "Periodo Finale"
 
 #. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:44
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:41
 msgid "Credit"
 msgstr "Credito"
 
 #. module: l10n_it_prima_nota_cassa
 #: field:account.report.prima_nota_cassa,fiscalyear_id:0
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:14
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:13
 msgid "Fiscal Year"
 msgstr "Anno Fiscale"
 
@@ -147,7 +145,12 @@ msgid "Display Accounts"
 msgstr "Mostra Conti"
 
 #. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:45
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:38
+msgid "Entry"
+msgstr "Registrazione"
+
+#. module: l10n_it_prima_nota_cassa
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:42
 msgid "Balance"
 msgstr "Saldo"
 
@@ -171,13 +174,10 @@ msgstr "Tutti"
 
 #. module: l10n_it_prima_nota_cassa
 #: help:account.report.prima_nota_cassa,initial_balance:0
-msgid "It adds initial balance row on report which display previous sum amount of debit/credit/balance"
+msgid ""
+"It adds initial balance row on report which display previous sum amount of "
+"debit/credit/balance"
 msgstr "Aggiunge una riga per il saldo iniziale sul report, che mostrerà la somma precedente per debiti/crediti/saldo"
-
-#. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:41
-msgid "Move"
-msgstr "Movimento"
 
 #. module: l10n_it_prima_nota_cassa
 #: selection:account.report.prima_nota_cassa,filter:0
@@ -185,12 +185,7 @@ msgid "Periods"
 msgstr "Periodi"
 
 #. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:38
-msgid "JRNL"
-msgstr "Sezionale"
-
-#. module: l10n_it_prima_nota_cassa
-#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:39
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:37
 msgid "Partner"
 msgstr "Partner"
 
@@ -205,7 +200,11 @@ msgid "Filter by"
 msgstr "Filtra per"
 
 #. module: l10n_it_prima_nota_cassa
+#: report:addons/l10n_it_prima_nota_cassa/report/prima_nota_cassa.mako:36
+msgid "Journal"
+msgstr ""
+
+#. module: l10n_it_prima_nota_cassa
 #: selection:account.report.prima_nota_cassa,target_move:0
 msgid "All Entries"
 msgstr "Tutti i movimenti"
-

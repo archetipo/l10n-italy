@@ -1,24 +1,27 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* l10n_it_sale
-#
+# * l10n_it_sale
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.2\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-05-12 20:12+0000\n"
-"PO-Revision-Date: 2011-05-12 22:18+0100\n"
-"Last-Translator: Lorenzo Battistini <lorenzo.battistini@agilebg.com>\n"
-"Language-Team: \n"
+"Project-Id-Version: l10n-italy (7.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-24 23:41+0000\n"
+"PO-Revision-Date: 2015-05-27 19:59+0000\n"
+"Last-Translator: Maxime Chambreuil <maxime.chambreuil@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-italy-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_it_sale
-#: field:account.invoice,goods_description_id:0
+#: view:account.invoice:0 field:account.invoice,goods_description_id:0
 #: field:res.partner,goods_description_id:0
 #: field:stock.picking,goods_description_id:0
+#: field:stock.picking.out,goods_description_id:0
 msgid "Description of goods"
 msgstr "Aspetto dei Beni"
 
@@ -43,20 +46,14 @@ msgstr "Picking List"
 
 #. module: l10n_it_sale
 #: model:ir.actions.act_window,name:l10n_it_sale.action_wizard_assign_ddt
-#: view:stock.picking:0
-#: view:wizard.assign.ddt:0
+#: view:stock.picking.out:0 view:wizard.assign.ddt:0
 msgid "Assign DDT"
 msgstr "Assegna DDT"
 
 #. module: l10n_it_sale
-#: sql_constraint:sale.order:0
-msgid "Order Reference must be unique !"
-msgstr "Il riferimento ordine deve essere unico!"
-
-#. module: l10n_it_sale
-#: model:ir.module.module,shortdesc:l10n_it_sale.module_meta_information
-msgid "Italian Localisation - Sale"
-msgstr "Localizzazione Italiana - Vendite"
+#: view:res.partner:0
+msgid "Sales & Purchases"
+msgstr ""
 
 #. module: l10n_it_sale
 #: field:sale.order,validity:0
@@ -69,22 +66,17 @@ msgid "wizard.assign.ddt"
 msgstr "wizard.assign.ddt"
 
 #. module: l10n_it_sale
-#: view:res.partner:0
-msgid "Notes"
-msgstr "Note"
-
-#. module: l10n_it_sale
 #: view:account.invoice:0
 msgid "Shipping"
 msgstr "Trasporto"
 
 #. module: l10n_it_sale
-#: field:stock.picking,ddt_number:0
+#: field:stock.picking,ddt_number:0 field:stock.picking.out,ddt_number:0
 msgid "DDT"
 msgstr "DDT"
 
 #. module: l10n_it_sale
-#: field:stock.picking,ddt_date:0
+#: field:stock.picking,ddt_date:0 field:stock.picking.out,ddt_date:0
 msgid "DDT date"
 msgstr "Data DDT"
 
@@ -101,10 +93,11 @@ msgid "Carriage Condition"
 msgstr "Resa merce"
 
 #. module: l10n_it_sale
-#: field:account.invoice,transportation_reason_id:0
+#: view:account.invoice:0 field:account.invoice,transportation_reason_id:0
 #: model:ir.model,name:l10n_it_sale.model_stock_picking_transportation_reason
 #: field:res.partner,transportation_reason_id:0
 #: field:stock.picking,transportation_reason_id:0
+#: field:stock.picking.out,transportation_reason_id:0
 #: view:stock.picking.transportation_reason:0
 msgid "Reason for transportation"
 msgstr "Causale del trasporto"
@@ -120,7 +113,7 @@ msgid "This will assign the DDT number"
 msgstr "Questo assegnerà il numero del DDT"
 
 #. module: l10n_it_sale
-#: code:addons/l10n_it_sale/wizard/assign_ddt.py:32
+#: code:addons/l10n_it_sale/wizard/assign_ddt.py:37
 #, python-format
 msgid "DTT number already assigned"
 msgstr "Numero DDT già assegnato"
@@ -136,6 +129,11 @@ msgstr "Causale del trasporto"
 #: view:stock.picking.goods_description:0
 msgid "Descriptions of Goods"
 msgstr "Aspetto dei Beni"
+
+#. module: l10n_it_sale
+#: view:res.partner:0
+msgid "Default shipping conditions"
+msgstr "Dati DDT"
 
 #. module: l10n_it_sale
 #: model:ir.model,name:l10n_it_sale.model_stock_picking_goods_description
@@ -157,9 +155,10 @@ msgid "Invoice"
 msgstr "Fattura"
 
 #. module: l10n_it_sale
-#: field:account.invoice,carriage_condition_id:0
+#: view:account.invoice:0 field:account.invoice,carriage_condition_id:0
 #: field:res.partner,carriage_condition_id:0
 #: field:stock.picking,carriage_condition_id:0
+#: field:stock.picking.out,carriage_condition_id:0
 msgid "Carriage condition"
 msgstr "Resa merce"
 
@@ -179,24 +178,6 @@ msgid "Sales Order"
 msgstr "Ordine di vendita"
 
 #. module: l10n_it_sale
-#: view:res.partner:0
-msgid "Default shipping conditions"
-msgstr "Dati DDT"
-
-#. module: l10n_it_sale
-#: model:ir.module.module,description:l10n_it_sale.module_meta_information
-msgid ""
-"OpenERP Italian Localization - Sale version\n"
-"\n"
-"Functionalities:\n"
-"\n"
-"- Documento di trasporto\n"
-"\n"
+#: model:ir.model,name:l10n_it_sale.model_stock_picking_out
+msgid "Delivery Orders"
 msgstr ""
-"Localizzazione Italiana - Versione Sale\n"
-"\n"
-"Funzionalità:\n"
-"\n"
-"- Documento di trasporto\n"
-"\n"
-

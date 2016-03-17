@@ -1,39 +1,58 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* l10n_it_withholding_tax
-#
+# * l10n_it_withholding_tax
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.1\n"
+"Project-Id-Version: l10n-italy (7.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-12 15:54+0000\n"
-"PO-Revision-Date: 2012-10-12 18:02+0100\n"
-"Last-Translator: Franco Tampieri <info@francotampieri.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2015-11-25 16:46+0000\n"
+"PO-Revision-Date: 2015-11-25 16:47+0000\n"
+"Last-Translator: Maxime Chambreuil <maxime.chambreuil@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-l10n-italy-7-0/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:90
+#: code:addons/l10n_it_withholding_tax/account.py:190
 #, python-format
 msgid "The company does not have an associated Withholding Payment Term"
 msgstr "L'Azienda non ha associato nessun Termine di pagamento per le Ritenute"
 
 #. module: l10n_it_withholding_tax
-#: constraint:res.company:0
-msgid "Error! You can not create recursive companies."
-msgstr "Errore! Non è possibile creare aziende ricorsive."
+#: model:ir.model,name:l10n_it_withholding_tax.model_account_config_settings
+msgid "account.config.settings"
+msgstr "account.config.settings"
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:106
+#: code:addons/l10n_it_withholding_tax/account.py:179
+#: code:addons/l10n_it_withholding_tax/account.py:184
+#: code:addons/l10n_it_withholding_tax/account.py:189
+#: code:addons/l10n_it_withholding_tax/account.py:194
+#: code:addons/l10n_it_withholding_tax/account.py:199
+#: code:addons/l10n_it_withholding_tax/account.py:219
+#: code:addons/l10n_it_withholding_tax/account.py:225
+#, python-format
+msgid "Error"
+msgstr "Errore"
+
+#. module: l10n_it_withholding_tax
+#: help:res.company,withholding_payment_term_id:0
+msgid "The withholding tax will have to be paid within this term"
+msgstr ""
+
+#. module: l10n_it_withholding_tax
+#: code:addons/l10n_it_withholding_tax/account.py:226
 #, python-format
 msgid "The payment term %s does not have due dates"
 msgstr "The payment term %s does not have due dates"
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:102
+#: code:addons/l10n_it_withholding_tax/account.py:220
 #, python-format
 msgid "The payment term %s has too many due dates"
 msgstr "The payment term %s has too many due dates"
@@ -44,24 +63,31 @@ msgid "Withholding tax entries"
 msgstr "Voci Tasse Ritenute"
 
 #. module: l10n_it_withholding_tax
+#: view:account.config.settings:0
+msgid "Witholding Tax"
+msgstr ""
+
+#. module: l10n_it_withholding_tax
+#: view:account.config.settings:0
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. module: l10n_it_withholding_tax
 #: field:account.invoice,has_withholding:0
 msgid "With withholding tax"
 msgstr "Con tasse ritenute"
 
 #. module: l10n_it_withholding_tax
+#: field:account.config.settings,withholding_payment_term_id:0
 #: field:res.company,withholding_payment_term_id:0
 msgid "Withholding tax Payment Term"
 msgstr "Termini Pagamento Ritenute"
 
 #. module: l10n_it_withholding_tax
+#: field:account.config.settings,withholding_account_id:0
 #: field:res.company,withholding_account_id:0
 msgid "Withholding account"
 msgstr "Conto Ritenute"
-
-#. module: l10n_it_withholding_tax
-#: sql_constraint:res.company:0
-msgid "The company name must be unique !"
-msgstr "Il nome azienda deve essere unico!"
 
 #. module: l10n_it_withholding_tax
 #: field:account.invoice,net_pay:0
@@ -74,45 +100,37 @@ msgid "Companies"
 msgstr "Aziende"
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:92
+#: code:addons/l10n_it_withholding_tax/account.py:195
 #, python-format
 msgid "The company does not have an associated Withholding journal"
 msgstr "L'Azienda non ha un Sezionale associato per le Ritenute"
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:86
-#: code:addons/l10n_it_withholding_tax/account.py:88
-#: code:addons/l10n_it_withholding_tax/account.py:90
-#: code:addons/l10n_it_withholding_tax/account.py:92
-#: code:addons/l10n_it_withholding_tax/account.py:101
-#: code:addons/l10n_it_withholding_tax/account.py:105
-#, python-format
-msgid "Error"
-msgstr "Errore"
+#: field:account.config.settings,authority_partner_id:0
+#: field:res.company,authority_partner_id:0
+msgid "Tax Authority Partner"
+msgstr ""
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:86
+#: code:addons/l10n_it_withholding_tax/account.py:180
 #, python-format
 msgid "Can't handle withholding tax with voucher of type other than payment"
 msgstr "Can't handle withholding tax with voucher of type other than payment"
 
 #. module: l10n_it_withholding_tax
+#: help:account.config.settings,withholding_account_id:0
 #: help:res.company,withholding_account_id:0
 msgid "Payable account used for amount due to tax authority"
 msgstr "Payable account used for amount due to tax authority"
 
 #. module: l10n_it_withholding_tax
-#: sql_constraint:account.invoice:0
-msgid "Invoice Number must be unique per Company!"
-msgstr "Nell'azienda il numero fattura dev'essere univoco!"
-
-#. module: l10n_it_withholding_tax
+#: help:account.config.settings,withholding_journal_id:0
 #: help:res.company,withholding_journal_id:0
 msgid "Journal used for registration of witholding amounts to be paid"
 msgstr "Journal used for registration of witholding amounts to be paid"
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:119
+#: code:addons/l10n_it_withholding_tax/account.py:247
 #, python-format
 msgid "Payable withholding - "
 msgstr "Ritenute Pagabili - "
@@ -128,17 +146,24 @@ msgid "Withholding amount"
 msgstr "Totale Ritenute"
 
 #. module: l10n_it_withholding_tax
+#: code:addons/l10n_it_withholding_tax/account.py:200
+#, python-format
+msgid "The company does not have an associated Tax Authority partner"
+msgstr ""
+
+#. module: l10n_it_withholding_tax
 #: model:ir.model,name:l10n_it_withholding_tax.model_account_invoice
 msgid "Invoice"
 msgstr "Fattura"
 
 #. module: l10n_it_withholding_tax
+#: field:account.config.settings,withholding_journal_id:0
 #: field:res.company,withholding_journal_id:0
 msgid "Withholding journal"
 msgstr "Sezionale Ritenute"
 
 #. module: l10n_it_withholding_tax
-#: code:addons/l10n_it_withholding_tax/account.py:88
+#: code:addons/l10n_it_withholding_tax/account.py:185
 #, python-format
 msgid "The company does not have an associated Withholding account"
 msgstr "L'Azienda non ha un conto associato per le Ritenute"
@@ -147,4 +172,3 @@ msgstr "L'Azienda non ha un conto associato per le Ritenute"
 #: field:account.voucher,withholding_move_ids:0
 msgid "Withholding Tax Entries"
 msgstr "Voci Tasse Ritenute"
-
