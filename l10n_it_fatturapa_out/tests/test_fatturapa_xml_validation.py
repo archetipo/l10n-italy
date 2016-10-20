@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Davide Corio
 # Copyright 2015-2016 Lorenzo Battistini - Agile Business Group
+# Copyright 2015-2016 Alessio Gerace - Agile Business Group
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
 import tempfile
 from odoo import workflow
-import openerp.tests.common as test_common
+from odoo.tests.common import TransactionCase
 from odoo.modules.module import get_module_resource
 from datetime import datetime
 from lxml import etree
@@ -14,7 +15,7 @@ import shutil
 import os
 
 
-class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
+class TestFatturaPAXMLValidation(TransactionCase):
 
     def getFilePath(self, filepath):
         with open(filepath) as test_data:
@@ -40,17 +41,17 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
 
     def setUp(self):
         super(TestFatturaPAXMLValidation, self).setUp()
-        self.wizard_model = self.registry('wizard.export.fatturapa')
-        self.data_model = self.registry('ir.model.data')
-        self.attach_model = self.registry('fatturapa.attachment.out')
-        self.invoice_model = self.registry('account.invoice')
-        self.fatturapa_attach = self.registry('fatturapa.attachments')
+        self.wizard_model = self.env['wizard.export.fatturapa']
+        self.data_model = self.env['ir.model.data']
+        self.attach_model = self.env['fatturapa.attachment.out']
+        self.invoice_model = self.env['account.invoice']
+        self.fatturapa_attach = self.env['fatturapa.attachments']
         self.context = {}
         self.maxDiff = None
-        self.company = self.env.ref('base.main_company')
-        self.company.sp_account_id = self.env.ref('account.ova')
+        self.company = self.env.ref('base.main_company']
+        self.company.sp_account_id = self.env.ref('account.ova']
         self.company.sp_journal_id = self.env.ref(
-            'account.miscellaneous_journal')
+            'account.miscellaneous_journal']
 
     def AttachFileAtInvoice(self, InvoiceId, filename):
         self.fatturapa_attach.create(
@@ -73,13 +74,13 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         consistent with date, in date_to_check.
         '''
         cr, uid = self.cr, self.uid
-        self.fy_model = self.registry('account.fiscalyear')
+        self.fy_model = self.env['account.fiscalyear']
         if not self.fy_model.find(
             cr, uid, dt=date_to_check, exception=False
         ):
-            ds = datetime.strptime(date_to_check, '%Y-%m-%d')
+            ds = datetime.strptime(date_to_check, '%Y-%m-%d']
             seq_id = self.data_model.get_object_reference(
-                cr, uid, 'account', 'sequence_sale_journal')
+                cr, uid, 'account', 'sequence_sale_journal']
             year = ds.date().year
             name = '%s' % year
             code = 'FY%s' % year
@@ -99,7 +100,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
             seq_name = 'seq%s' % name
             self.context['fiscalyear_id'] = self.fiscalyear_id
             prefix = 'SAJ/%s/' % year
-            s_id = self.registry('ir.sequence').create(
+            s_id = self.env['ir.sequence'].create(
                 cr, uid,
                 {
                     'name': seq_name,
@@ -108,7 +109,7 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
                 }
             )
             self.context['sequence_id'] = s_id
-            self.registry('account.sequence.fiscalyear').create(
+            self.env['account.sequence.fiscalyear'].create(
                 cr, uid,
                 {
                     "sequence_id": s_id,
@@ -120,19 +121,19 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
 
     def set_sequences(self, file_number, invoice_number):
         cr, uid = self.cr, self.uid
-        seq_pool = self.registry('ir.sequence')
+        seq_pool = self.env['ir.sequence']
         seq_id = self.data_model.get_object_reference(
-            cr, uid, 'l10n_it_fatturapa', 'seq_fatturapa')
+            cr, uid, 'l10n_it_fatturapa', 'seq_fatturapa']
         seq_pool.write(cr, uid, [seq_id[1]], {
             'implementation': 'no_gap',
             'number_next_actual': file_number,
             }
         )
-        if self.context.get('fiscalyear_id'):
-            seq_id = (0, self.context.get('sequence_id'))
+        if self.context.get('fiscalyear_id']:
+            seq_id = (0, self.context.get('sequence_id'])
         else:
             seq_id = self.data_model.get_object_reference(
-                cr, uid, 'account', 'sequence_sale_journal')
+                cr, uid, 'account', 'sequence_sale_journal']
         seq_pool.write(
             cr, uid, [seq_id[1]],
             {
@@ -152,8 +153,8 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
         # this  write updates context with
         # fiscalyear_id
         if attach:
-            self.AttachFileAtInvoice(invoice_id, 'test1.pdf')
-            self.AttachFileAtInvoice(invoice_id, 'test2.pdf')
+            self.AttachFileAtInvoice(invoice_id, 'test1.pdf']
+            self.AttachFileAtInvoice(invoice_id, 'test2.pdf']
         self.invoice_model.write(
             cr, uid, invoice_id, {}, context=self.context)
         workflow.trg_validate(
@@ -170,55 +171,55 @@ class TestFatturaPAXMLValidation(test_common.SingleTransactionCase):
     def check_content(self, xml_content, file_name):
         parser = etree.XMLParser(remove_blank_text=True)
         test_fatt_data = self.getFile(file_name)[1]
-        test_fatt_content = test_fatt_data.decode('base64')
+        test_fatt_content = test_fatt_data.decode('base64']
         test_fatt = etree.fromstring(test_fatt_content, parser)
         xml = etree.fromstring(xml_content, parser)
         self.assertEqual(etree.tostring(test_fatt), etree.tostring(xml))
 
     def test_0_xml_export(self):
         cr, uid = self.cr, self.uid
-        self.checkCreateFiscalYear('2014-01-07')
+        self.checkCreateFiscalYear('2014-01-07']
         self.context['fiscalyear_id'] = self.fiscalyear_id
         self.set_sequences(1, 13)
-        invoice_id = self.confirm_invoice('fatturapa_invoice_0')
+        invoice_id = self.confirm_invoice('fatturapa_invoice_0']
         res = self.run_wizard(invoice_id)
 
-        self.assertTrue(res, 'Export failed.')
+        self.assertTrue(res, 'Export failed.']
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
-        self.assertEqual(attachment.datas_fname, 'IT06363391001_00001.xml')
+        self.assertEqual(attachment.datas_fname, 'IT06363391001_00001.xml']
 
         # XML doc to be validated
-        xml_content = attachment.datas.decode('base64')
-        self.check_content(xml_content, 'IT06363391001_00001.xml')
+        xml_content = attachment.datas.decode('base64']
+        self.check_content(xml_content, 'IT06363391001_00001.xml']
 
     def test_1_xml_export(self):
         cr, uid = self.cr, self.uid
-        self.checkCreateFiscalYear('2015-06-15')
+        self.checkCreateFiscalYear('2015-06-15']
         self.set_sequences(2, 14)
-        invoice_id = self.confirm_invoice('fatturapa_invoice_1')
+        invoice_id = self.confirm_invoice('fatturapa_invoice_1']
         res = self.run_wizard(invoice_id)
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
 
-        xml_content = attachment.datas.decode('base64')
-        self.check_content(xml_content, 'IT06363391001_00002.xml')
+        xml_content = attachment.datas.decode('base64']
+        self.check_content(xml_content, 'IT06363391001_00002.xml']
 
     def test_2_xml_export(self):
         cr, uid = self.cr, self.uid
-        self.checkCreateFiscalYear('2015-06-15')
+        self.checkCreateFiscalYear('2015-06-15']
         self.set_sequences(3, 15)
         invoice_id = self.confirm_invoice('fatturapa_invoice_2', attach=True)
         res = self.run_wizard(invoice_id)
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
-        xml_content = attachment.datas.decode('base64')
+        xml_content = attachment.datas.decode('base64']
 
         self.check_content(xml_content, 'IT06363391001_00003.xml')
 
     def test_3_xml_export(self):
         cr, uid = self.cr, self.uid
-        self.checkCreateFiscalYear('2015-06-15')
+        self.checkCreateFiscalYear('2015-06-15']
         self.set_sequences(4, 16)
-        invoice_id = self.confirm_invoice('fatturapa_invoice_3')
+        invoice_id = self.confirm_invoice('fatturapa_invoice_3']
         res = self.run_wizard(invoice_id)
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
-        xml_content = attachment.datas.decode('base64')
-        self.check_content(xml_content, 'IT06363391001_00004.xml')
+        xml_content = attachment.datas.decode('base64']
+        self.check_content(xml_content, 'IT06363391001_00004.xml']

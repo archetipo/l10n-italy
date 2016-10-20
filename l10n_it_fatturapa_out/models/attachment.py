@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2014 Davide Corio
+# Copyright (C) 2016 Alessio Gerace
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.osv import fields, orm
+from odoo import fields, orm
 
 
 class FatturaPAAttachment(orm.Model):
@@ -11,10 +12,8 @@ class FatturaPAAttachment(orm.Model):
     _inherits = {'ir.attachment': 'ir_attachment_id'}
     _inherit = ['mail.thread']
 
-    _columns = {
-        'ir_attachment_id': fields.many2one(
+    ir_attachment_id = fields.Many2one(
             'ir.attachment', 'Attachment', required=True, ondelete="cascade"),
-        'out_invoice_ids': fields.one2many(
+    out_invoice_ids = fields.One2many(
             'account.invoice', 'fatturapa_attachment_out_id',
             string="Out Invoices", readonly=True),
-    }

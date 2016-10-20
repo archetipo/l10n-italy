@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
 
         <record model="ir.ui.view" id="view_fatturapa_out_attachment_form">
             <field name="name">fatturapa.attachment.out.form</field>
             <field name="model">fatturapa.attachment.out</field>
             <field name="arch" type="xml">
-                <form string="Export FatturaPA" version="7.0">
+                <form string="Export FatturaPA" >
                     <div>
                         <field name="datas" filename="datas_fname" />
                         <field name="datas_fname"/>
@@ -43,5 +42,4 @@
             name="FatturaPA Export Files"
             id="fatturapa_attachment_menu"/>
 
-    </data>
-</openerp>
+</odoo>

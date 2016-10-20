@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
 
         <record id="view_invoice_form_fatturapa" model="ir.ui.view">
             <field name="name">account.invoice.fatturapa</field>
@@ -8,7 +7,7 @@
             <field name="inherit_id" ref="account.invoice_form"></field>
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
-                    <page string="Related Documents ">
+                    <page name="relateddoc" string="Related Documents ">
                         <group string="Related Documents">
                             <field name="related_documents" nolabel="1">
                                 <tree editable="bottom" string="Related Documents">
@@ -24,14 +23,14 @@
                             </field>
                         </group>
                     </page>
-                    <page string="FatturaPA">
+                    <page name="fatturapa" string="FatturaPA">
                         <group>
                             <group string="Results">
                                 <field name="fatturapa_attachment_out_id"></field>
                             </group>
                         </group>
                     </page>
-                    <page string="FatturaPA attachments">
+                    <page name="fatturapaattach" string="FatturaPA attachments">
                         <group string="Attachments">
                             <field name="fatturapa_doc_attachments" nolabel="1" >
                                 <tree string="Attachments">
@@ -57,5 +56,5 @@
                 </xpath>
             </field>
         </record>
-    </data>
-</openerp>
+
+</odoo>
