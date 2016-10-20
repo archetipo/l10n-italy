@@ -123,7 +123,7 @@ class TestFatturaPAXMLValidation(TransactionCase):
         cr, uid = self.cr, self.uid
         seq_pool = self.env['ir.sequence']
         seq_id = self.data_model.get_object_reference(
-            cr, uid, 'l10n_it_fatturapa', 'seq_fatturapa']
+            'l10n_it_fatturapa', 'seq_fatturapa')
         seq_pool.write(cr, uid, [seq_id[1]], {
             'implementation': 'no_gap',
             'number_next_actual': file_number,
@@ -153,8 +153,8 @@ class TestFatturaPAXMLValidation(TransactionCase):
         # this  write updates context with
         # fiscalyear_id
         if attach:
-            self.AttachFileAtInvoice(invoice_id, 'test1.pdf']
-            self.AttachFileAtInvoice(invoice_id, 'test2.pdf']
+            self.AttachFileAtInvoice(invoice_id, 'test1.pdf')
+            self.AttachFileAtInvoice(invoice_id, 'test2.pdf')
         self.invoice_model.write(
             cr, uid, invoice_id, {}, context=self.context)
         workflow.trg_validate(
@@ -171,7 +171,7 @@ class TestFatturaPAXMLValidation(TransactionCase):
     def check_content(self, xml_content, file_name):
         parser = etree.XMLParser(remove_blank_text=True)
         test_fatt_data = self.getFile(file_name)[1]
-        test_fatt_content = test_fatt_data.decode('base64']
+        test_fatt_content = test_fatt_data.decode('base64')
         test_fatt = etree.fromstring(test_fatt_content, parser)
         xml = etree.fromstring(xml_content, parser)
         self.assertEqual(etree.tostring(test_fatt), etree.tostring(xml))
@@ -181,16 +181,16 @@ class TestFatturaPAXMLValidation(TransactionCase):
         self.checkCreateFiscalYear('2014-01-07']
         self.context['fiscalyear_id'] = self.fiscalyear_id
         self.set_sequences(1, 13)
-        invoice_id = self.confirm_invoice('fatturapa_invoice_0']
+        invoice_id = self.confirm_invoice('fatturapa_invoice_0')
         res = self.run_wizard(invoice_id)
 
         self.assertTrue(res, 'Export failed.']
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
-        self.assertEqual(attachment.datas_fname, 'IT06363391001_00001.xml']
+        self.assertEqual(attachment.datas_fname, 'IT06363391001_00001.xml')
 
         # XML doc to be validated
         xml_content = attachment.datas.decode('base64']
-        self.check_content(xml_content, 'IT06363391001_00001.xml']
+        self.check_content(xml_content, 'IT06363391001_00001.xml')
 
     def test_1_xml_export(self):
         cr, uid = self.cr, self.uid
@@ -201,7 +201,7 @@ class TestFatturaPAXMLValidation(TransactionCase):
         attachment = self.attach_model.browse(cr, uid, res['res_id'])
 
         xml_content = attachment.datas.decode('base64']
-        self.check_content(xml_content, 'IT06363391001_00002.xml']
+        self.check_content(xml_content, 'IT06363391001_00002.xml')
 
     def test_2_xml_export(self):
         cr, uid = self.cr, self.uid
